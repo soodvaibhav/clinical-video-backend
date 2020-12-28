@@ -1,4 +1,4 @@
-import { ProcedureDocument } from './dto/schema/procedure.schema';
+import { ProcedureDocument } from '../schema/procedure.schema';
 import {
   Injectable,
   NotAcceptableException,
@@ -6,12 +6,12 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ProcedureDto } from './dto/dto/procedure.dto';
-import { DeleteAnnotation } from './dto/dto/delete-annotation-response.dto';
-import { Annotation } from './dto/dto/annotation.dto';
+import { ProcedureDto } from './dto2/procedure.dto';
+import { DeleteAnnotation } from '../dto/delete-annotation-response.dto';
+import { Annotation } from '../dto/annotation.dto';
 import * as fs from 'fs';
 import { join } from 'path';
-import env from '../environment/environment.local';
+import env from '../../environment/environment.local';
 
 @Injectable()
 export class ProcedureService {

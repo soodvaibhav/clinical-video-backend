@@ -1,8 +1,8 @@
 import { MongooseModule } from '@nestjs/mongoose';
 import { Module } from '@nestjs/common';
-import { ProcedureController } from './procedure.controller';
-import { ProcedureService } from './procedure.service';
-import { ProcedureSchema } from './dto/schema/procedure.schema';
+import { ProcedureController } from './controllers/procedure.controller';
+import { ProcedureService } from './services/procedure.service';
+import { ProcedureSchema } from './schema/procedure.schema';
 
 @Module({
   imports: [

@@ -8,10 +8,10 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { ProcedureDto } from './dto/dto/procedure.dto';
-import { DeleteAnnotation } from './dto/dto/delete-annotation-response.dto';
-import { Annotation } from './dto/dto/annotation.dto';
-import { ProcedureService } from './procedure.service';
+import { ProcedureDto } from './dto2/procedure.dto';
+import { DeleteAnnotation } from '../dto/delete-annotation-response.dto';
+import { Annotation } from '../dto/annotation.dto';
+import { ProcedureService } from '../services/procedure.service';
 
 @ApiTags('Procedure')
 @Controller('procedure')
