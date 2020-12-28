@@ -39,3 +39,4 @@ lerna-debug.log*
 
 asset/*
 assets/*
+/assets
