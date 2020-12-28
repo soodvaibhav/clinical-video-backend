@@ -1,11 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  ArrayNotEmpty,
   IsDateString,
-  IsMongoId,
   IsNotEmpty,
-  IsNumber,
+  IsOptional,
   IsString,
 } from 'class-validator';
 import { Video } from './video.dto';
@@ -15,17 +13,17 @@ export class ProcedureDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({ type: String })
-  patient_id: string;
+  patientId: string;
 
   @IsNotEmpty()
   @IsDateString()
   @ApiProperty({ type: Date })
-  procedure_date: Date;
+  procedureDate: Date;
 
   @IsNotEmpty()
   @IsDateString()
   @ApiProperty({ type: Date })
-  patient_dob: Date;
+  patientDob: Date;
 
   @IsNotEmpty()
   @IsString()
@@ -40,40 +38,34 @@ export class ProcedureDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({ type: String })
-  procedure_type: string;
+  procedureType: string;
 
   @IsNotEmpty()
   @IsString()
   @ApiProperty({ type: String })
-  conducting_surgeon: string;
+  conductingSurgeon: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @ApiProperty({ type: String })
-  surgical_device_liaison: string;
+  surgicalDeviceLiaison: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty({ type: Number })
-  total_videos: number;
+  // @IsString()
+  // @ApiProperty({ type: String })
+  // implant: string;
 
-  @IsString()
-  @ApiProperty({ type: String })
-  implant: string;
+  // @IsString()
+  // @ApiProperty({ type: String })
+  // procedureId: string;
 
-  @IsString()
-  @ApiProperty({ type: String })
-  procedureId: string;
+  // @IsString()
+  // @ApiProperty({ type: String })
+  // status: string;
 
-  @IsString()
-  @ApiProperty({ type: String })
-  status: string;
+  // @IsString()
+  // @ApiProperty({ type: String })
+  // procedureLength: string;
 
-  @IsString()
-  @ApiProperty({ type: String })
-  procedureLength: string;
-
-  @ArrayNotEmpty()
   @ApiProperty({ type: [Video] })
   video: Video[];
 }

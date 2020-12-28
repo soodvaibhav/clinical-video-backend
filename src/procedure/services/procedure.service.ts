@@ -1,4 +1,4 @@
-import { ProcedureDocument } from '../schema/procedure.schema';
+import { Procedure, ProcedureDocument } from '../schema/procedure.schema';
 import {
   Injectable,
   NotAcceptableException,
@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ProcedureDto } from './dto2/procedure.dto';
+import { ProcedureDto } from '../dto/procedure.dto';
 import { DeleteAnnotation } from '../dto/delete-annotation-response.dto';
 import { Annotation } from '../dto/annotation.dto';
 import * as fs from 'fs';
@@ -23,29 +23,24 @@ export class ProcedureService {
    * finds and returns `Procedure` by ID
    * @param id : procedure id
    */
-  async getProcedure(id: string): Promise<ProcedureDto> {
-    try {
-      const procedure = await this.procedureModel.findById(id).exec();
-      return procedure;
-    } catch (e) {
-      throw new NotFoundException({ status: 404, description: 'Not Found' });
+  async getProcedure(id: string): Promise<Procedure> {
+    const procedure = await this.procedureModel.findById(id).exec();
+    if (!procedure) {
+      throw new NotFoundException();
     }
+    return procedure;
   }
 
-  getAllProcedure(): Promise<ProcedureDto[]> {
+  getAllProcedure(): Promise<Procedure[]> {
     return this.procedureModel.find().exec();
   }
 
   /**
    * @param procedure: Procedure object that will be created and stored in DB
    */
-  async createProcedure(procedure: ProcedureDto): Promise<ProcedureDto> {
-    try {
-      const procedureModel = new this.procedureModel(procedure);
-      return procedureModel.save();
-    } catch (e) {
-      throw new NotAcceptableException('Invalid Values');
-    }
+  async createProcedure(procedure: ProcedureDto): Promise<Procedure> {
+    const procedureModel = new this.procedureModel(procedure);
+    return procedureModel.save();
   }
 
   /**
