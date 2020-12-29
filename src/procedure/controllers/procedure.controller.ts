@@ -126,23 +126,11 @@ export class ProcedureController {
     const path = join(environment.staticFilesPath, 'videos', name);
     try {
       // return createReadStream(path);
-      const pdf = await new Promise<Buffer>((resolve, reject) => {
-        readFile(path, {}, (err, data) => {
-          if (err) {
-            console.log(err);
-            
-            reject(err);
-          } else {
-            console.log(data);
-            
-            resolve(data);
-          }
-        });
-      });
+      const pdf = await this.procedureService.getVideoFile(path);
       return pdf;
     } catch (e) {
       console.log(e);
-      
+
       throw new NotFoundException('File does no exist');
     }
   }

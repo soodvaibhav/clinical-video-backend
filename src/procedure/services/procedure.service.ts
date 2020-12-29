@@ -158,4 +158,23 @@ export class ProcedureService {
       description: 'invalid values',
     });
   }
+
+  /**
+   * get file stream to download file
+   */
+async getVideoFile(path: string) {
+    return await new Promise<Buffer>((resolve, reject) => {
+      fs.readFile(path, {}, (err, data) => {
+        if (err) {
+          console.log(err);
+
+          reject(err);
+        } else {
+          console.log(data);
+
+          resolve(data);
+        }
+      });
+    });
+  }
 }
