@@ -4,6 +4,10 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
+  HttpCode,
+  HttpStatus,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -17,7 +21,7 @@ import { Annotation } from '../dto/annotation.dto';
 import { ProcedureService } from '../services/procedure.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { mkdirSync } from 'fs';
+import { createReadStream, mkdirSync, readFile } from 'fs';
 import { join } from 'path';
 import environment from '../../environment/environment.local';
 import { v4 as uuidv4 } from 'uuid';
@@ -112,5 +116,34 @@ export class ProcedureController {
       videoId,
       annotationId,
     );
+  }
+
+  @Get('/downloadVideo/:name')
+  @HttpCode(HttpStatus.OK)
+  @Header('Content-Type', 'video/mp4')
+  @Header('Content-Disposition', 'attachment')
+  async downloadVideo(@Param('name') name: string): Promise<any> {
+    const path = join(environment.staticFilesPath, 'videos', name);
+    try {
+      // return createReadStream(path);
+      const pdf = await new Promise<Buffer>((resolve, reject) => {
+        readFile(path, {}, (err, data) => {
+          if (err) {
+            console.log(err);
+            
+            reject(err);
+          } else {
+            console.log(data);
+            
+            resolve(data);
+          }
+        });
+      });
+      return pdf;
+    } catch (e) {
+      console.log(e);
+      
+      throw new NotFoundException('File does no exist');
+    }
   }
 }

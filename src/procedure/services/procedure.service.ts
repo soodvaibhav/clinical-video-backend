@@ -12,6 +12,8 @@ import { Annotation } from '../dto/annotation.dto';
 import * as fs from 'fs';
 import { join } from 'path';
 import env from '../../environment/environment.local';
+import { mkdirSync } from 'fs';
+import environment from '../../environment/environment.local';
 
 @Injectable()
 export class ProcedureService {
@@ -63,14 +65,16 @@ export class ProcedureService {
         try {
           const allAnnotation = iterator.annotations.concat(annotation);
 
-          const path = join(__dirname, '..', '..', '..', 'assets');
+          // const path = join(__dirname, '..', '..', '..', 'assets');
+          const path = join(environment.staticFilesPath, 'annotations');
+          mkdirSync(path, { recursive: true });
           const filename = procedureId + '-' + videoId + '-annotaion' + '.vtt';
           const fileContents = this.generateAnnotationTemplate(allAnnotation);
           /// write file
           fs.writeFileSync(join(path, filename), fileContents);
           const index = procedure.video.indexOf(iterator);
           iterator.annotations = allAnnotation;
-          iterator.subtitles = env.DomainURI + '/' + filename;
+          iterator.subtitles = filename;
           procedure.video[index] = iterator;
           const procedureModel = new this.procedureModel(procedure);
           return procedureModel.save();
@@ -134,10 +138,11 @@ export class ProcedureService {
           updatedAnnotationList,
         );
 
-        const path = join(__dirname, '..', '..', 'assets');
-        const filename = procedureId + '-' + videoId + '-annotaion' + '.vtt';
-        /// write file
-        fs.writeFileSync(join(path, filename), fileContents);
+        // const path = join(environment.staticFilesPath, 'annotations');
+        // mkdirSync(path, { recursive: true });
+        // const filename = procedureId + '-' + videoId + '-annotaion' + '.vtt';
+        // /// write file
+        // fs.writeFileSync(join(path, filename), fileContents);
         const updatedProcedure = new this.procedureModel(procedure);
         await updatedProcedure.save();
         const temp: DeleteAnnotation = {
