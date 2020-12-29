@@ -13,7 +13,7 @@ class Video {
   @Prop({ required: false })
   public subtitles: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   public videoId: string;
 
   @Prop({ required: false })
@@ -41,17 +41,14 @@ class Annotation {
 
 @Schema()
 export class Procedure {
-  // @Prop()
-  // _id: string;
+  @Prop()
+  patientId: string;
 
   @Prop()
-  patient_id: string;
+  procedureDate: Date;
 
   @Prop()
-  procedure_date: Date;
-
-  @Prop()
-  patient_dob: Date;
+  patientDob: Date;
 
   @Prop()
   study: string;
@@ -60,28 +57,25 @@ export class Procedure {
   site: string;
 
   @Prop()
-  procedure_type: string;
+  procedureType: string;
 
   @Prop()
-  conducting_surgeon: string;
+  conductingSurgeon: string;
 
   @Prop()
-  surgical_device_liaison: string;
+  surgicalDeviceLiaison: string;
 
-  @Prop()
-  total_videos: number;
+  // @Prop({ required: false })
+  // implant: string;
 
-  @Prop({ required: false })
-  implant: string;
+  // @Prop({ required: false })
+  // procedureId: string;
 
-  @Prop({ required: false })
-  procedureId: string;
+  // @Prop({ required: false })
+  // status: string;
 
-  @Prop({ required: false })
-  status: string;
-
-  @Prop({ required: false })
-  procedureLength: string;
+  // @Prop({ required: false })
+  // procedureLength: string;
 
   @ApiProperty({ required: true })
   @Prop([Video])

@@ -10,7 +10,7 @@ import { join } from 'path';
     MongooseModule.forRoot(environment.mongoURI),
     ProcedureModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'assets'),
+      rootPath: environment.staticFilesPath,
     }),
   ],
 })
