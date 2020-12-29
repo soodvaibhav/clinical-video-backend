@@ -1,4 +1,3 @@
-import { Procedure, ProcedureDocument } from '../schema/procedure.schema';
 import {
   Injectable,
   NotAcceptableException,
@@ -7,6 +6,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ProcedureDto } from '../dto/procedure.dto';
+import { Procedure, ProcedureDocument } from '../schema/procedure.schema';
 import { DeleteAnnotation } from '../dto/delete-annotation-response.dto';
 import { Annotation } from '../dto/annotation.dto';
 import * as fs from 'fs';
@@ -63,7 +63,7 @@ export class ProcedureService {
         try {
           const allAnnotation = iterator.annotations.concat(annotation);
 
-          const path = join(__dirname, '..', '..', 'assets');
+          const path = join(__dirname, '..', '..', '..', 'assets');
           const filename = procedureId + '-' + videoId + '-annotaion' + '.vtt';
           const fileContents = this.generateAnnotationTemplate(allAnnotation);
           /// write file
