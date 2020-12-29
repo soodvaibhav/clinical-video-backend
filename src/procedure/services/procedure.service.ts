@@ -74,7 +74,7 @@ export class ProcedureService {
           // fs.writeFileSync(join(path, filename), fileContents);
           const index = procedure.video.indexOf(iterator);
           iterator.annotations = allAnnotation;
-          iterator.subtitles = filename;
+          // iterator.subtitles = filename;
           procedure.video[index] = iterator;
           const procedureModel = new this.procedureModel(procedure);
           return procedureModel.save();
