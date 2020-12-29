@@ -1,3 +1,4 @@
+import { ProcedureDto } from './../dto/procedure.dto';
 import {
   Body,
   Controller,
@@ -8,7 +9,6 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { ProcedureDto } from './dto2/procedure.dto';
 import { DeleteAnnotation } from '../dto/delete-annotation-response.dto';
 import { Annotation } from '../dto/annotation.dto';
 import { ProcedureService } from '../services/procedure.service';
