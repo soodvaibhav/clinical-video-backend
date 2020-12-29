@@ -66,12 +66,12 @@ export class ProcedureService {
           const allAnnotation = iterator.annotations.concat(annotation);
 
           // const path = join(__dirname, '..', '..', '..', 'assets');
-          const path = join(environment.staticFilesPath, 'annotations');
-          mkdirSync(path, { recursive: true });
-          const filename = procedureId + '-' + videoId + '-annotaion' + '.vtt';
-          const fileContents = this.generateAnnotationTemplate(allAnnotation);
-          /// write file
-          fs.writeFileSync(join(path, filename), fileContents);
+          // const path = join(environment.staticFilesPath, 'annotations');
+          // mkdirSync(path, { recursive: true });
+          // const filename = procedureId + '-' + videoId + '-annotaion' + '.vtt';
+          // const fileContents = this.generateAnnotationTemplate(allAnnotation);
+          // /// write file
+          // fs.writeFileSync(join(path, filename), fileContents);
           const index = procedure.video.indexOf(iterator);
           iterator.annotations = allAnnotation;
           iterator.subtitles = filename;
