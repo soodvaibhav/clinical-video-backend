@@ -64,14 +64,6 @@ export class ProcedureService {
       if (iterator.videoId === videoId) {
         try {
           const allAnnotation = iterator.annotations.concat(annotation);
-
-          // const path = join(__dirname, '..', '..', '..', 'assets');
-          // const path = join(environment.staticFilesPath, 'annotations');
-          // mkdirSync(path, { recursive: true });
-          // const filename = procedureId + '-' + videoId + '-annotaion' + '.vtt';
-          // const fileContents = this.generateAnnotationTemplate(allAnnotation);
-          // /// write file
-          // fs.writeFileSync(join(path, filename), fileContents);
           const index = procedure.video.indexOf(iterator);
           iterator.annotations = allAnnotation;
           // iterator.subtitles = filename;
@@ -134,15 +126,6 @@ export class ProcedureService {
           (annotation) => annotation.id !== annotationId,
         );
         iterator.annotations = updatedAnnotationList;
-        const fileContents = this.generateAnnotationTemplate(
-          updatedAnnotationList,
-        );
-
-        // const path = join(environment.staticFilesPath, 'annotations');
-        // mkdirSync(path, { recursive: true });
-        // const filename = procedureId + '-' + videoId + '-annotaion' + '.vtt';
-        // /// write file
-        // fs.writeFileSync(join(path, filename), fileContents);
         const updatedProcedure = new this.procedureModel(procedure);
         await updatedProcedure.save();
         const temp: DeleteAnnotation = {
@@ -162,7 +145,7 @@ export class ProcedureService {
   /**
    * get file stream to download file
    */
-async getVideoFile(path: string) {
+  async getVideoFile(path: string) {
     return await new Promise<Buffer>((resolve, reject) => {
       fs.readFile(path, {}, (err, data) => {
         if (err) {
